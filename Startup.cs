@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BoardGamesManager.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace BoardGamesManager
 {
@@ -24,6 +26,9 @@ namespace BoardGamesManager
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddDbContext<BoardGamesManagerContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("BoardGamesManagerContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
