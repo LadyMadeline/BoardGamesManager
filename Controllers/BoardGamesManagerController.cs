@@ -33,7 +33,7 @@ namespace BoardGamesManager.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateItem(byte[] Image, string Title, string GameDuration, int RecomendedAge, string NumberOfPlayers, double Price, string Description, string LinkToStore)
+        public IActionResult CreateItem(string Image, string Title, string GameDuration, string RecomendedAge, string NumberOfPlayers, double Price, string Description, string LinkToStore)
         {
             BoardGamesService.AddBoardGame(Image, Title, GameDuration, RecomendedAge, NumberOfPlayers, Price, Description, LinkToStore);
             return View("BoardGames", BoardGamesService.GetBoardGames());

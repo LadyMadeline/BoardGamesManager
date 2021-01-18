@@ -14,7 +14,7 @@ namespace BoardGamesManager.Models
 
         }
 
-        public BoardGameDataBaseModel(string image, string title, string gameDuration, int recomendedAge, string numbersOfPlayers, double price, string description, string linkToStore) 
+        public BoardGameDataBaseModel(string image, string title, string gameDuration, string recomendedAge, string numbersOfPlayers, double price, string description, string linkToStore) 
             : base(title, gameDuration, recomendedAge, numbersOfPlayers, price, description, linkToStore)
         {
             this.Image = image;

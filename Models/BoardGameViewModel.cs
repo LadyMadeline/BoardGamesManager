@@ -16,7 +16,7 @@ namespace BoardGamesManager.Models
 
         }
 
-        public BoardGameViewModel(byte[] image, string title, string gameDuration, int recomendedAge, string numbersOfPlayers, double price, string description, string linkToStore)
+        public BoardGameViewModel(byte[] image, string title, string gameDuration, string recomendedAge, string numbersOfPlayers, double price, string description, string linkToStore)
             : base(title, gameDuration, recomendedAge, numbersOfPlayers, price, description, linkToStore)
         {
             this.Image = image;

@@ -22,9 +22,9 @@ namespace BoardGamesManager.Services
             return BoardGameContext.BoardGame.ToList();
         }
 
-        public void AddBoardGame(byte[] image, string title, string gameDuration, int recomendenAge, string numberOfPlayers, double price, string description, string linkToStore)
+        public void AddBoardGame(string image, string title, string gameDuration, string recomendenAge, string numberOfPlayers, double price, string description, string linkToStore)
         {
-            BoardGameDataBaseModel boardGame = new BoardGameDataBaseModel("d;afjf", title, gameDuration, recomendenAge, numberOfPlayers, price, description, linkToStore);
+            BoardGameDataBaseModel boardGame = new BoardGameDataBaseModel(image, title, gameDuration, recomendenAge, numberOfPlayers, price, description, linkToStore);
             BoardGameContext.Add<BoardGameDataBaseModel>(boardGame);
             BoardGameContext.SaveChanges();
         }

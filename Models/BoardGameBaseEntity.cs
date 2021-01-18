@@ -17,7 +17,7 @@ namespace BoardGamesManager.Models
         public string GameDuration { get; set; }
 
         [DisplayName("Recomended age")]
-        public int RecomendedAge { get; set; }
+        public string RecomendedAge { get; set; }
 
         [DisplayName("Number of players")]
         public string NumberOfPlayers { get; set; }
@@ -36,7 +36,7 @@ namespace BoardGamesManager.Models
 
         }
 
-        public BoardGameBaseEntity(string title, string gameDuration, int recomendedAge, string numbersOfPlayers, double price, string description, string linkToStore)
+        public BoardGameBaseEntity(string title, string gameDuration, string recomendedAge, string numbersOfPlayers, double price, string description, string linkToStore)
         {
             this.Title = title;
             this.GameDuration = gameDuration;
