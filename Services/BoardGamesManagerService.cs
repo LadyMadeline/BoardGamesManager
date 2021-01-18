@@ -28,5 +28,12 @@ namespace BoardGamesManager.Services
             BoardGameContext.Add<BoardGameDataBaseModel>(boardGame);
             BoardGameContext.SaveChanges();
         }
+
+        public void DeleteBoardGame(int id)
+        {
+            BoardGameDataBaseModel item = BoardGameContext.Find<BoardGameDataBaseModel>(id);
+            BoardGameContext.Remove(item);
+            BoardGameContext.SaveChanges();
+        }
     }
 }

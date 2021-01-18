@@ -38,5 +38,11 @@ namespace BoardGamesManager.Controllers
             BoardGamesService.AddBoardGame(Image, Title, GameDuration, RecomendedAge, NumberOfPlayers, Price, Description, LinkToStore);
             return View("BoardGames", BoardGamesService.GetBoardGames());
         }
+
+        public IActionResult DeleteItem(int id)
+        {
+            BoardGamesService.DeleteBoardGame(id);
+            return View("BoardGames", BoardGamesService.GetBoardGames());
+        }
     }
 }
