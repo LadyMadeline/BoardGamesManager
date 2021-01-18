@@ -22,10 +22,21 @@ namespace BoardGamesManager.Controllers
         }
 
         [HttpGet("/")]
-        public IActionResult BoardGamesManagerGet()
+        public IActionResult BoardGames()
         {
-            var temp = BoardGamesService.GetBoardGames();
-            return View("BoardGames", temp);
+            return View(BoardGamesService.GetBoardGames());
+        }
+
+        public IActionResult CreateItem()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateItem(byte[] Image, string Title, string GameDuration, int RecomendedAge, string NumberOfPlayers, double Price, string Description, string LinkToStore)
+        {
+            BoardGamesService.AddBoardGame(Image, Title, GameDuration, RecomendedAge, NumberOfPlayers, Price, Description, LinkToStore);
+            return View("BoardGames", BoardGamesService.GetBoardGames());
         }
     }
 }

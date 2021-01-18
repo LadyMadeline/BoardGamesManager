@@ -8,5 +8,16 @@ namespace BoardGamesManager.Models
     public class BoardGameDataBaseModel : BoardGameBaseEntity
     {
         public string Image { get; set; }
+
+        public BoardGameDataBaseModel()
+        {
+
+        }
+
+        public BoardGameDataBaseModel(string image, string title, string gameDuration, int recomendedAge, string numbersOfPlayers, double price, string description, string linkToStore) 
+            : base(title, gameDuration, recomendedAge, numbersOfPlayers, price, description, linkToStore)
+        {
+            this.Image = image;
+        }
     }
 }
