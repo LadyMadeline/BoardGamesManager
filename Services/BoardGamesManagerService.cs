@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace BoardGamesManager.Services
@@ -17,9 +18,18 @@ namespace BoardGamesManager.Services
             this.BoardGameContext = context;
         }
 
-        public List<BoardGameDataBaseModel> GetBoardGames()
+        public List<BoardGameViewModel> GetBoardGames()
         {
-            return BoardGameContext.BoardGame.ToList();
+            return BoardGameContext.BoardGame.ToList()
+                .Select(boardGame => new BoardGameViewModel(boardGame.Id, null, boardGame.Title, boardGame.GameDuration, boardGame.RecomendedAge, boardGame.NumberOfPlayers, boardGame.Price, boardGame.Description, boardGame.LinkToStore))
+                .ToList();
+        }
+
+        public BoardGameViewModel GetBoardGame(int id)
+        {
+            BoardGameDataBaseModel boardGame = BoardGameContext.Find<BoardGameDataBaseModel>(id);
+            BoardGameViewModel boardGameView = new BoardGameViewModel(boardGame.Id, null, boardGame.Title, boardGame.GameDuration, boardGame.RecomendedAge, boardGame.NumberOfPlayers, boardGame.Price, boardGame.Description, boardGame.LinkToStore);
+            return boardGameView;
         }
 
         public void AddBoardGame(string image, string title, string gameDuration, string recomendenAge, string numberOfPlayers, double price, string description, string linkToStore)

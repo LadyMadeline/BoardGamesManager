@@ -33,9 +33,9 @@ namespace BoardGamesManager.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateItem(string Image, string Title, string GameDuration, string RecomendedAge, string NumberOfPlayers, double Price, string Description, string LinkToStore)
+        public IActionResult CreateItem(string image, string title, string gameDuration, string recomendedAge, string numberOfPlayers, double price, string Description, string LinkToStore)
         {
-            BoardGamesService.AddBoardGame(Image, Title, GameDuration, RecomendedAge, NumberOfPlayers, Price, Description, LinkToStore);
+            BoardGamesService.AddBoardGame(image, title, gameDuration, recomendedAge, numberOfPlayers, price, Description, LinkToStore);
             return View("BoardGames", BoardGamesService.GetBoardGames());
         }
 
@@ -43,6 +43,13 @@ namespace BoardGamesManager.Controllers
         {
             BoardGamesService.DeleteBoardGame(id);
             return View("BoardGames", BoardGamesService.GetBoardGames());
+        }
+
+
+        public IActionResult DetailsItem(int id)
+        {
+            BoardGameViewModel boardGame = BoardGamesService.GetBoardGame(id);
+            return View("DetailsItem", boardGame);
         }
     }
 }

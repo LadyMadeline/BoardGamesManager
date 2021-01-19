@@ -4,14 +4,16 @@ using BoardGamesManager.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BoardGamesManager.Migrations
 {
     [DbContext(typeof(BoardGamesManagerContext))]
-    partial class BoardGamesManagerContextModelSnapshot : ModelSnapshot
+    [Migration("20210119104215_UpdateRecomendedAge")]
+    partial class UpdateRecomendedAge
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

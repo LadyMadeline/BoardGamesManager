@@ -15,5 +15,7 @@ namespace BoardGamesManager.Data
         }
 
         public DbSet<BoardGameDataBaseModel> BoardGame { get; set; }
+
+        public DbSet<BoardGamesManager.Models.BoardGameViewModel> BoardGameViewModel { get; set; }
     }
 }
