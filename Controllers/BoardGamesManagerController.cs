@@ -33,9 +33,9 @@ namespace BoardGamesManager.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateItem(string image, string title, string gameDuration, string recomendedAge, string numberOfPlayers, double price, string Description, string LinkToStore)
+        public IActionResult CreateItem(string image, string title, string gameDuration, string recomendedAge, string numberOfPlayers, double price, string description, string linkToStore)
         {
-            BoardGamesService.AddBoardGame(image, title, gameDuration, recomendedAge, numberOfPlayers, price, Description, LinkToStore);
+            BoardGamesService.AddBoardGame(image, title, gameDuration, recomendedAge, numberOfPlayers, price, description, linkToStore);
             return View("BoardGames", BoardGamesService.GetBoardGames());
         }
 
@@ -48,6 +48,28 @@ namespace BoardGamesManager.Controllers
 
         public IActionResult DetailsItem(int id)
         {
+            BoardGameViewModel boardGame = BoardGamesService.GetBoardGame(id);
+            return View("DetailsItem", boardGame);
+        }
+
+        public IActionResult EditItem(int id)
+        {
+            BoardGameViewModel boardGame = BoardGamesService.GetBoardGame(id);
+            ViewBag.Image = boardGame.Image;
+            ViewBag.BoardGameTitle = boardGame.Title;
+            ViewBag.GameDuration = boardGame.GameDuration;
+            ViewBag.RecomendedAge = boardGame.RecomendedAge;
+            ViewBag.NumberOfPlayers = boardGame.NumberOfPlayers;
+            ViewBag.Price = boardGame.Price;
+            ViewBag.Description = boardGame.Description;
+            ViewBag.LinkToStore = boardGame.LinkToStore;
+            return View("EditItem");
+        }
+
+        [HttpPost]
+        public IActionResult EditItem(int id, string image, string title, string gameDuration, string recomendedAge, string numberOfPlayers, double price, string description, string linkToStore)
+        {
+            BoardGamesService.EditBoardGame(id, image, title, gameDuration, recomendedAge, numberOfPlayers, price, description, linkToStore);
             BoardGameViewModel boardGame = BoardGamesService.GetBoardGame(id);
             return View("DetailsItem", boardGame);
         }

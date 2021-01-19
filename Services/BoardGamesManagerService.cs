@@ -45,5 +45,20 @@ namespace BoardGamesManager.Services
             BoardGameContext.Remove(item);
             BoardGameContext.SaveChanges();
         }
+
+        public void EditBoardGame(int id, string image, string title, string gameDuration, string recomendenAge, string numberOfPlayers, double price, string description, string linkToStore)
+        {
+            BoardGameDataBaseModel item = BoardGameContext.Find<BoardGameDataBaseModel>(id);
+            item.Image = image;
+            item.Title = title;
+            item.GameDuration = gameDuration;
+            item.RecomendedAge = recomendenAge;
+            item.NumberOfPlayers = numberOfPlayers;
+            item.Price = price;
+            item.Description = description;
+            item.LinkToStore = linkToStore;
+            BoardGameContext.Update(item);
+            BoardGameContext.SaveChanges();
+        }
     }
 }
