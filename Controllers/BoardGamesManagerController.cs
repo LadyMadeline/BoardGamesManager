@@ -39,6 +39,14 @@ namespace BoardGamesManager.Controllers
             return View("BoardGames", BoardGamesService.GetBoardGames());
         }
 
+        [HttpGet]
+        public IActionResult DeleteItemPage (int id)
+        {
+            BoardGameViewModel boardGame = BoardGamesService.GetBoardGame(id);
+            return View("DeleteItem", boardGame);
+        }
+
+        [HttpPost]
         public IActionResult DeleteItem(int id)
         {
             BoardGamesService.DeleteBoardGame(id);

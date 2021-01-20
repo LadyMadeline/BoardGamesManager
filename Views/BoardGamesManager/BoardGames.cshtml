@@ -11,34 +11,31 @@
 <p>
     <a asp-action="CreateItem">Create New</a>
 </p>
-<table class="table">
+<table class="table table-bordered text-center">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Image)
             </th>
-            <th>
+            <th style="width: 15%">
                 @Html.DisplayNameFor(model => model.Title)
             </th>
-            <th>
+            <th style="width: 10%">
                 @Html.DisplayNameFor(model => model.GameDuration)
             </th>
-            <th>
+            <th style="width: 10%">
                 @Html.DisplayNameFor(model => model.RecomendedAge)
             </th>
-            <th>
+            <th style="width: 10%">
                 @Html.DisplayNameFor(model => model.NumberOfPlayers)
             </th>
-            <th>
+            <th style="width: 10%">
                 @Html.DisplayNameFor(model => model.Price)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
+            <th style="width: 10%">
                 @Html.DisplayNameFor(model => model.LinkToStore)
             </th>
-            <th></th>
+            <th style="width: 16%">Options</th>
         </tr>
     </thead>
     <tbody>
@@ -60,18 +57,15 @@
                 @Html.DisplayFor(modelItem => item.NumberOfPlayers)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Price)
+                @Html.DisplayFor(modelItem => item.Price) UAH
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LinkToStore)
+                <a href = "@Html.DisplayFor(modelItem => item.LinkToStore)" target="_blank">Buy</a>
             </td>
             <td>
                 <a asp-action="EditItem" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="DetailsItem" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="DeleteItem" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="DeleteItemPage" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }
