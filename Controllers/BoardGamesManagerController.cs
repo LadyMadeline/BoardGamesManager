@@ -1,12 +1,14 @@
 ﻿using BoardGamesManager.Data;
 using BoardGamesManager.Models;
 using BoardGamesManager.Services;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,10 +17,12 @@ namespace BoardGamesManager.Controllers
     public class BoardGamesManagerController : Controller
     {
         public BoardGamesManagerService BoardGamesService { get; set; }
+        public IWebHostEnvironment HostEnvironment { get; }
 
-        public BoardGamesManagerController(BoardGamesManagerContext context)
+        public BoardGamesManagerController(BoardGamesManagerContext context, IWebHostEnvironment hostEnvironment)
         {
             this.BoardGamesService = new BoardGamesManagerService(context);
+            HostEnvironment = hostEnvironment;
         }
 
         [HttpGet("/")]
@@ -33,9 +37,20 @@ namespace BoardGamesManager.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateItem(string image, string title, string gameDuration, string recomendedAge, string numberOfPlayers, double price, string description, string linkToStore)
+        public async Task<IActionResult> CreateItem([Bind("Image, Title, GameDuration, RecomendedAge, NumberOfPlayers, Price, Description, LinkToStore")] BoardGameViewModel boardGameViewModel)
         {
-            BoardGamesService.AddBoardGame(image, title, gameDuration, recomendedAge, numberOfPlayers, price, description, linkToStore);
+            string wwwRootPath = Path.GetRelativePath(HostEnvironment.WebRootPath, "BoardGamesManager/wwwroot");
+            string fileName = Path.GetFileNameWithoutExtension(boardGameViewModel.Image.FileName) + DateTime.Now.ToString("yymmssfff");
+            string extension = Path.GetExtension(boardGameViewModel.Image.FileName);
+            fileName = fileName + extension;
+            string path = Path.Combine(wwwRootPath + "/image/", fileName);
+
+            using(var fileStream = new FileStream(path, FileMode.Create))
+            {
+                await boardGameViewModel.Image.CopyToAsync(fileStream);
+            }
+
+            BoardGamesService.AddBoardGame(Path.Combine("/image/", fileName), boardGameViewModel.Title, boardGameViewModel.GameDuration, boardGameViewModel.RecomendedAge, boardGameViewModel.NumberOfPlayers, boardGameViewModel.Price, boardGameViewModel.Description, boardGameViewModel.LinkToStore);
             return View("BoardGames", BoardGamesService.GetBoardGames());
         }
 
@@ -49,6 +64,15 @@ namespace BoardGamesManager.Controllers
         [HttpPost]
         public IActionResult DeleteItem(int id)
         {
+            BoardGameViewModel boardGame = BoardGamesService.GetBoardGame(id);
+            string wwwRootPath = HostEnvironment.WebRootPath;
+            string imagePath = Path.Combine(wwwRootPath + boardGame.ImagePath);
+
+            if (System.IO.File.Exists(imagePath))
+            {
+                System.IO.File.Delete(imagePath);
+            }
+            
             BoardGamesService.DeleteBoardGame(id);
             return View("BoardGames", BoardGamesService.GetBoardGames());
         }
@@ -63,7 +87,6 @@ namespace BoardGamesManager.Controllers
         public IActionResult EditItem(int id)
         {
             BoardGameViewModel boardGame = BoardGamesService.GetBoardGame(id);
-            ViewBag.Image = boardGame.Image;
             ViewBag.BoardGameTitle = boardGame.Title;
             ViewBag.GameDuration = boardGame.GameDuration;
             ViewBag.RecomendedAge = boardGame.RecomendedAge;
@@ -75,11 +98,39 @@ namespace BoardGamesManager.Controllers
         }
 
         [HttpPost]
-        public IActionResult EditItem(int id, string image, string title, string gameDuration, string recomendedAge, string numberOfPlayers, double price, string description, string linkToStore)
+        public async Task<IActionResult> EditItem([Bind("Image, Title, GameDuration, RecomendedAge, NumberOfPlayers, Price, Description, LinkToStore")] BoardGameViewModel boardGameViewModel, int id)
         {
-            BoardGamesService.EditBoardGame(id, image, title, gameDuration, recomendedAge, numberOfPlayers, price, description, linkToStore);
             BoardGameViewModel boardGame = BoardGamesService.GetBoardGame(id);
-            return View("DetailsItem", boardGame);
+
+            if (boardGameViewModel.Image != null)
+            {
+                string wwwRootPath = Path.GetRelativePath(HostEnvironment.WebRootPath, "BoardGamesManager/wwwroot");
+                string fileName = Path.GetFileNameWithoutExtension(boardGameViewModel.Image.FileName) + DateTime.Now.ToString("yymmssfff");
+                string extension = Path.GetExtension(boardGameViewModel.Image.FileName);
+                fileName += extension;
+                string path = Path.Combine(wwwRootPath + "/image/", fileName);
+                string imagePath = Path.Combine(wwwRootPath + boardGame.ImagePath);
+
+                if (System.IO.File.Exists(imagePath))
+                {
+                    System.IO.File.Delete(imagePath);
+                }
+
+                using (var fileStream = new FileStream(path, FileMode.Create))
+                {
+                    await boardGameViewModel.Image.CopyToAsync(fileStream);
+                }
+
+                BoardGamesService.EditBoardGame(id, Path.Combine("/image/", fileName), boardGameViewModel.Title, boardGameViewModel.GameDuration, boardGameViewModel.RecomendedAge, boardGameViewModel.NumberOfPlayers, boardGameViewModel.Price, boardGameViewModel.Description, boardGameViewModel.LinkToStore);
+            }
+
+            else
+            {
+                BoardGamesService.EditBoardGame(id, boardGame.ImagePath, boardGameViewModel.Title, boardGameViewModel.GameDuration, boardGameViewModel.RecomendedAge, boardGameViewModel.NumberOfPlayers, boardGameViewModel.Price, boardGameViewModel.Description, boardGameViewModel.LinkToStore);
+            }
+
+            BoardGameViewModel newBoardGame = BoardGamesService.GetBoardGame(id);
+            return View("DetailsItem", newBoardGame);
         }
     }
 }

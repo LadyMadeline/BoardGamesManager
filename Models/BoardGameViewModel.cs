@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,23 +11,27 @@ namespace BoardGamesManager.Models
     public class BoardGameViewModel : BoardGameBaseEntity
     {
         [DisplayName("Image")]
-        public byte[] Image { get; set; }
+        
+        [NotMapped]
+        public IFormFile Image { get; set; }
+
+        public string ImagePath { get; set; }
 
         public BoardGameViewModel()
         {
 
         }
 
-        public BoardGameViewModel(byte[] image, string title, string gameDuration, string recomendedAge, string numbersOfPlayers, double price, string description, string linkToStore)
+        public BoardGameViewModel(string imagePath, string title, string gameDuration, string recomendedAge, string numbersOfPlayers, double price, string description, string linkToStore)
             : base(title, gameDuration, recomendedAge, numbersOfPlayers, price, description, linkToStore)
         {
-            this.Image = image;
+            this.ImagePath = imagePath;
         }
 
-        public BoardGameViewModel(int id, byte[] image, string title, string gameDuration, string recomendedAge, string numbersOfPlayers, double price, string description, string linkToStore)
+        public BoardGameViewModel(int id, string imagePath, string title, string gameDuration, string recomendedAge, string numbersOfPlayers, double price, string description, string linkToStore)
             : base(title, gameDuration, recomendedAge, numbersOfPlayers, price, description, linkToStore)
         {
-            this.Image = image;
+            this.ImagePath = imagePath;
             this.Id = id;
         }
     }

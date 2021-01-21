@@ -20,15 +20,16 @@ namespace BoardGamesManager.Services
 
         public List<BoardGameViewModel> GetBoardGames()
         {
+            
             return BoardGameContext.BoardGame.ToList()
-                .Select(boardGame => new BoardGameViewModel(boardGame.Id, null, boardGame.Title, boardGame.GameDuration, boardGame.RecomendedAge, boardGame.NumberOfPlayers, boardGame.Price, boardGame.Description, boardGame.LinkToStore))
+                .Select(boardGame => new BoardGameViewModel(boardGame.Id, boardGame.Image, boardGame.Title, boardGame.GameDuration, boardGame.RecomendedAge, boardGame.NumberOfPlayers, boardGame.Price, boardGame.Description, boardGame.LinkToStore))
                 .ToList();
         }
 
         public BoardGameViewModel GetBoardGame(int id)
         {
             BoardGameDataBaseModel boardGame = BoardGameContext.Find<BoardGameDataBaseModel>(id);
-            BoardGameViewModel boardGameView = new BoardGameViewModel(boardGame.Id, null, boardGame.Title, boardGame.GameDuration, boardGame.RecomendedAge, boardGame.NumberOfPlayers, boardGame.Price, boardGame.Description, boardGame.LinkToStore);
+            BoardGameViewModel boardGameView = new BoardGameViewModel(boardGame.Id, boardGame.Image, boardGame.Title, boardGame.GameDuration, boardGame.RecomendedAge, boardGame.NumberOfPlayers, boardGame.Price, boardGame.Description, boardGame.LinkToStore);
             return boardGameView;
         }
 

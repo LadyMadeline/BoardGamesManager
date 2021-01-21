@@ -1,21 +1,21 @@
 ﻿@model BoardGamesManager.Models.BoardGameViewModel
 
 @{
-    ViewData["Title"] = "EditItem";
+    ViewData["Title"] = "Edit";
 }
 
 <h1>Edit</h1>
 
+<hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="EditItem">
+        <form asp-action="EditItem" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Image" class="control-label"></label>
-                <input asp-for="Image" value="@ViewBag.Image" class="form-control" />
+                <label asp-for="Image" class="control-label">Upload image file</label>
+                <input asp-for="Image" accept="image/*" required />
                 <span asp-validation-for="Image" class="text-danger"></span>
             </div>
-            <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
                 <input asp-for="Title" value="@ViewBag.BoardGameTitle" class="form-control" />
@@ -43,7 +43,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
-                <textarea class="form-control">@ViewBag.Description</textarea>
+                <textarea asp-for="Description" value="@ViewBag.Description" class="form-control"></textarea>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -52,7 +52,7 @@
                 <span asp-validation-for="LinkToStore" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Edit" class="btn btn-primary" />
             </div>
         </form>
     </div>
