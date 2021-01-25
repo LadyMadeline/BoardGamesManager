@@ -7,52 +7,48 @@
 <h1>@Html.DisplayFor(model => model.Title)</h1>
 
 <div>
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Image)
-        </dt>
-        <dd class="col-sm-10">
-            <img src="@Model.ImagePath" asp-append-version="true"/>
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.GameDuration)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.GameDuration)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.RecomendedAge)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.RecomendedAge)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NumberOfPlayers)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NumberOfPlayers)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Price) UAH
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LinkToStore)
-        </dt>
-        <dd class = "col-sm-10">
-            <a href="@Html.DisplayFor(model => model.LinkToStore)" target="_blank">Buy</a>
-        </dd>
-    </dl>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <img src="@Model.ImagePath" asp-append-version="true" />
+            </div>
+            <div class="col-sm">
+                <br />
+                <br />
+                <br />
+                <br />
+                <b>@Html.DisplayNameFor(model => model.GameDuration):</b>
+                @Html.DisplayFor(model => model.GameDuration)
+                <br />
+                <br />
+                <b>@Html.DisplayNameFor(model => model.RecomendedAge):</b>
+                @Html.DisplayFor(model => model.RecomendedAge)
+                <br />
+                <br />
+                <b>@Html.DisplayNameFor(model => model.NumberOfPlayers):</b>
+                @Html.DisplayFor(model => model.NumberOfPlayers)
+                <br />
+                <br />
+                <b>@Html.DisplayNameFor(model => model.Price):</b>
+                @Html.DisplayFor(model => model.Price) UAH
+                <br />
+                <br />
+                <b>@Html.DisplayNameFor(model => model.LinkToStore):</b>
+                <a href="@Html.DisplayFor(model => model.LinkToStore)" target="_blank">Buy</a>
+            </div>
+            <div class="col-sm">
+                <br />
+                <br />
+                <br />
+                <b>@Html.DisplayNameFor(model => model.Description):</b>
+                <br />
+                @Html.DisplayFor(model => model.Description)
+            </div>
+        </div>
+    </div>
 </div>
 <div>
+
     <a asp-action="EditItem" asp-route-id="@Model.Id">Edit</a> |
     <a asp-action="DeleteItemPage" asp-route-id="@Model.Id">Delete</a> |
     <a asp-action="BoardGames">Back to List</a>
