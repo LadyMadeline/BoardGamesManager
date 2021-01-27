@@ -16,6 +16,7 @@ namespace BoardGamesManager.Controllers
 {
     public class BoardGamesManagerController : Controller
     {
+        //TODO: add interface 
         public BoardGamesManagerService BoardGamesService { get; set; }
         public IWebHostEnvironment HostEnvironment { get; }
 
