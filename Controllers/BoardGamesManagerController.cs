@@ -17,13 +17,13 @@ namespace BoardGamesManager.Controllers
     public class BoardGamesManagerController : Controller
     {
         //TODO: add interface 
-        public BoardGamesManagerService BoardGamesService { get; set; }
+        public IBoardGamesManagerService BoardGamesService { get; set; }
         public IWebHostEnvironment HostEnvironment { get; }
 
         public BoardGamesManagerController(BoardGamesManagerContext context, IWebHostEnvironment hostEnvironment)
         {
             this.BoardGamesService = new BoardGamesManagerService(context);
-            HostEnvironment = hostEnvironment;
+            this.HostEnvironment = hostEnvironment;
         }
 
         [HttpGet("/")]

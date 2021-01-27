@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BoardGamesManager.Services
 {
-    public class BoardGamesManagerService
+    public class BoardGamesManagerService : IBoardGamesManagerService
     {
         public BoardGamesManagerContext BoardGameContext { get; set; }
 
