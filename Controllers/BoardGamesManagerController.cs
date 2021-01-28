@@ -16,17 +16,16 @@ namespace BoardGamesManager.Controllers
 {
     public class BoardGamesManagerController : Controller
     {
-        //TODO: add interface 
         public IBoardGamesManagerService BoardGamesService { get; set; }
         public IWebHostEnvironment HostEnvironment { get; }
 
-        public BoardGamesManagerController(BoardGamesManagerContext context, IWebHostEnvironment hostEnvironment)
+        public BoardGamesManagerController(IWebHostEnvironment hostEnvironment, IBoardGamesManagerService boardGamesService)
         {
-            this.BoardGamesService = new BoardGamesManagerService(context);
+            this.BoardGamesService = boardGamesService;
             this.HostEnvironment = hostEnvironment;
         }
 
-        [HttpGet("/")]
+        [HttpGet]
         public IActionResult BoardGames()
         {
             return View(BoardGamesService.GetBoardGames());
@@ -88,13 +87,8 @@ namespace BoardGamesManager.Controllers
         public IActionResult EditItem(int id)
         {
             BoardGameViewModel boardGame = BoardGamesService.GetBoardGame(id);
-            ViewBag.BoardGameTitle = boardGame.Title;
-            ViewBag.GameDuration = boardGame.GameDuration;
-            ViewBag.RecomendedAge = boardGame.RecomendedAge;
-            ViewBag.NumberOfPlayers = boardGame.NumberOfPlayers;
-            ViewBag.Price = boardGame.Price;
-            ViewBag.Description = boardGame.Description;
-            ViewBag.LinkToStore = boardGame.LinkToStore;
+            //TODO: понять. нужно ли здесь использовать viewbag или модель
+            ViewBag.EditedBoardGame = boardGame;
             return View("EditItem");
         }
 

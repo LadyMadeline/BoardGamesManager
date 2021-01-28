@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BoardGamesManager.Data;
 using Microsoft.EntityFrameworkCore;
+using BoardGamesManager.Services;
 
 namespace BoardGamesManager
 {
@@ -28,6 +29,7 @@ namespace BoardGamesManager
 
             services.AddDbContext<BoardGamesManagerContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("BoardGamesManagerContext")));
+            services.AddTransient<IBoardGamesManagerService, BoardGamesManagerService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

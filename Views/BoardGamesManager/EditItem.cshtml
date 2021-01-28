@@ -18,37 +18,37 @@
             </div>
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" value="@ViewBag.BoardGameTitle" class="form-control" />
+                <input asp-for="Title" value="@ViewBag.EditedBoardGame.Title" class="form-control" />
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="GameDuration" class="control-label"></label>
-                <input asp-for="GameDuration" value="@ViewBag.GameDuration" class="form-control" />
+                <input asp-for="GameDuration" value="@ViewBag.EditedBoardGame.GameDuration" class="form-control" />
                 <span asp-validation-for="GameDuration" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="RecomendedAge" class="control-label"></label>
-                <input asp-for="RecomendedAge" value="@ViewBag.RecomendedAge" class="form-control" />
+                <input asp-for="RecomendedAge" value="@ViewBag.EditedBoardGame.RecomendedAge" class="form-control" />
                 <span asp-validation-for="RecomendedAge" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="NumberOfPlayers" class="control-label"></label>
-                <input asp-for="NumberOfPlayers" value="@ViewBag.NumberOfPlayers" class="form-control" />
+                <input asp-for="NumberOfPlayers" value="@ViewBag.EditedBoardGame.NumberOfPlayers" class="form-control" />
                 <span asp-validation-for="NumberOfPlayers" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" value="@ViewBag.Price" class="form-control" />
+                <input asp-for="Price" value="@ViewBag.EditedBoardGame.Price" class="form-control" />
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
-                <textarea name="Description" class="form-control">@ViewBag.Description</textarea>
+                <textarea name="Description" class="form-control">@ViewBag.EditedBoardGame.Description</textarea>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="LinkToStore" class="control-label"></label>
-                <input asp-for="LinkToStore" value="@ViewBag.LinkToStore" class="form-control" />
+                <input asp-for="LinkToStore" value="@ViewBag.EditedBoardGame.LinkToStore" class="form-control" />
                 <span asp-validation-for="LinkToStore" class="text-danger"></span>
             </div>
             <div class="form-group">
