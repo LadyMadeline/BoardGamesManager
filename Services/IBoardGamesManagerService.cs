@@ -10,8 +10,9 @@ namespace BoardGamesManager.Services
     {
         public List<BoardGameViewModel> GetBoardGames();
         public BoardGameViewModel GetBoardGame(int id);
-        public void AddBoardGame(string image, string title, string gameDuration, string recomendenAge, string numberOfPlayers, double price, string description, string linkToStore);
+        public void AddBoardGame(string image, BoardGameViewModel boardGameViewModel);
         public void DeleteBoardGame(int id);
-        public void EditBoardGame(int id, string image, string title, string gameDuration, string recomendenAge, string numberOfPlayers, double price, string description, string linkToStore);
+        public void EditBoardGame(int id, BoardGameViewModel boardGameViewModel);
+        public void EditBoardGame(int id, string imagePath, BoardGameViewModel boardGameViewModel);
     }
 }

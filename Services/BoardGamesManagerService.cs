@@ -33,9 +33,9 @@ namespace BoardGamesManager.Services
             return boardGameView;
         }
 
-        public void AddBoardGame(string image, string title, string gameDuration, string recomendenAge, string numberOfPlayers, double price, string description, string linkToStore)
+        public void AddBoardGame(string image, BoardGameViewModel boardGameViewModel)
         {
-            BoardGameDataBaseModel boardGame = new BoardGameDataBaseModel(image, title, gameDuration, recomendenAge, numberOfPlayers, price, description, linkToStore);
+            BoardGameDataBaseModel boardGame = new BoardGameDataBaseModel(image, boardGameViewModel.Title, boardGameViewModel.GameDuration, boardGameViewModel.RecomendedAge, boardGameViewModel.NumberOfPlayers, boardGameViewModel.Price, boardGameViewModel.Description, boardGameViewModel.LinkToStore);
             BoardGameContext.Add<BoardGameDataBaseModel>(boardGame);
             BoardGameContext.SaveChanges();
         }
@@ -47,17 +47,31 @@ namespace BoardGamesManager.Services
             BoardGameContext.SaveChanges();
         }
 
-        public void EditBoardGame(int id, string image, string title, string gameDuration, string recomendenAge, string numberOfPlayers, double price, string description, string linkToStore)
+        public void EditBoardGame(int id, BoardGameViewModel boardGameViewModel)
         {
             BoardGameDataBaseModel item = BoardGameContext.Find<BoardGameDataBaseModel>(id);
-            item.Image = image;
-            item.Title = title;
-            item.GameDuration = gameDuration;
-            item.RecomendedAge = recomendenAge;
-            item.NumberOfPlayers = numberOfPlayers;
-            item.Price = price;
-            item.Description = description;
-            item.LinkToStore = linkToStore;
+            item.Title = boardGameViewModel.Title;
+            item.GameDuration = boardGameViewModel.GameDuration;
+            item.RecomendedAge = boardGameViewModel.RecomendedAge;
+            item.NumberOfPlayers = boardGameViewModel.NumberOfPlayers;
+            item.Price = boardGameViewModel.Price;
+            item.Description = boardGameViewModel.Description;
+            item.LinkToStore = boardGameViewModel.LinkToStore;
+            BoardGameContext.Update(item);
+            BoardGameContext.SaveChanges();
+        }
+
+        public void EditBoardGame(int id, string imagePath, BoardGameViewModel boardGameViewModel)
+        {
+            BoardGameDataBaseModel item = BoardGameContext.Find<BoardGameDataBaseModel>(id);
+            item.Image = imagePath;
+            item.Title = boardGameViewModel.Title;
+            item.GameDuration = boardGameViewModel.GameDuration;
+            item.RecomendedAge = boardGameViewModel.RecomendedAge;
+            item.NumberOfPlayers = boardGameViewModel.NumberOfPlayers;
+            item.Price = boardGameViewModel.Price;
+            item.Description = boardGameViewModel.Description;
+            item.LinkToStore = boardGameViewModel.LinkToStore;
             BoardGameContext.Update(item);
             BoardGameContext.SaveChanges();
         }
