@@ -18,12 +18,11 @@ namespace BoardGamesManager.Services
             this.BoardGameContext = context;
         }
 
-        public List<BoardGameViewModel> GetBoardGames()
+        public IEnumerable<BoardGameViewModel> GetBoardGames()
         {
             
             return BoardGameContext.BoardGame.ToList()
-                .Select(boardGame => new BoardGameViewModel(boardGame.Id, boardGame.Image, boardGame.Title, boardGame.GameDuration, boardGame.RecomendedAge, boardGame.NumberOfPlayers, boardGame.Price, boardGame.Description, boardGame.LinkToStore))
-                .ToList();
+                .Select(boardGame => new BoardGameViewModel(boardGame.Id, boardGame.Image, boardGame.Title, boardGame.GameDuration, boardGame.RecomendedAge, boardGame.NumberOfPlayers, boardGame.Price, boardGame.Description, boardGame.LinkToStore));
         }
 
         public BoardGameViewModel GetBoardGame(int id)

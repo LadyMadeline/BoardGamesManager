@@ -8,7 +8,7 @@ namespace BoardGamesManager.Services
 {
     public interface IBoardGamesManagerService
     {
-        public List<BoardGameViewModel> GetBoardGames();
+        public IEnumerable<BoardGameViewModel> GetBoardGames();
         public BoardGameViewModel GetBoardGame(int id);
         public void AddBoardGame(string image, BoardGameViewModel boardGameViewModel);
         public void DeleteBoardGame(int id);

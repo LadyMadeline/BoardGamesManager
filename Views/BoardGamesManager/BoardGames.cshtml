@@ -11,6 +11,12 @@
 <p>
     <a asp-action="CreateItem">Create New</a>
 </p>
+<form asp-controller="BoardGamesManager" asp-action="BoardGames" method="get">
+    <p>
+        Title: <input type="text" name="SearchString" />
+        <input type="submit" value="Search" />
+    </p>
+</form>
 <table class="table table-bordered text-center">
     <thead>
         <tr>

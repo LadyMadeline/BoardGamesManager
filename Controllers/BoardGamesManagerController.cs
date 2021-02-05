@@ -27,9 +27,16 @@ namespace BoardGamesManager.Controllers
         }
 
         [HttpGet]
-        public IActionResult BoardGames()
+        public IActionResult BoardGames(string searchString)
         {
-            return View(BoardGamesService.GetBoardGames());
+            IEnumerable<BoardGameViewModel> boardGames = BoardGamesService.GetBoardGames();
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                boardGames = boardGames.Where(s => s.Title.Contains(searchString));
+            }
+
+            return View(boardGames);
         }
 
         public IActionResult CreateItem()
