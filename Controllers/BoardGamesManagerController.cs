@@ -61,7 +61,7 @@ namespace BoardGamesManager.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateItem([Bind("Image, Title, GameDuration, RecomendedAge, NumberOfPlayers, Price, Description, LinkToStore")] BoardGameViewModel boardGameViewModel)
         {
-            string wwwRootPath = Path.GetRelativePath(HostEnvironment.WebRootPath, "BoardGamesManager/wwwroot");
+            string wwwRootPath = HostEnvironment.WebRootPath;
             string fileName = await FileStorageUtil.CreateFile(wwwRootPath, boardGameViewModel.Image.FileName, boardGameViewModel.Image);
             BoardGamesService.AddBoardGame(Path.Combine("/image/", fileName), boardGameViewModel);
             return Redirect("BoardGames");
@@ -116,7 +116,7 @@ namespace BoardGamesManager.Controllers
                 BoardGamesService.EditBoardGame(id, boardGameViewModel);
             }
 
-            return Redirect("BoardGames");
+            return RedirectToAction("BoardGames");
         }
     }
 }
