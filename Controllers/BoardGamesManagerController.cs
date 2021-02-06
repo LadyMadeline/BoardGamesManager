@@ -27,13 +27,27 @@ namespace BoardGamesManager.Controllers
         }
 
         [HttpGet]
-        public IActionResult BoardGames(string searchString)
+        public IActionResult BoardGames(string searchString, string sort)
         {
             IEnumerable<BoardGameViewModel> boardGames = BoardGamesService.GetBoardGames();
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                boardGames = boardGames.Where(s => s.Title.Contains(searchString));
+                boardGames = boardGames.Where(boardGame => boardGame.Title.Contains(searchString));
+            }
+
+            switch (sort)
+            {
+                case "Sort:" :
+                    break;
+
+                case "Price Asc":
+                    boardGames = boardGames.OrderBy(boardGame => boardGame.Price);
+                    break;
+
+                case "Price Desc":
+                    boardGames = boardGames.OrderByDescending(boardGame => boardGame.Price);
+                    break;
             }
 
             return View(boardGames);

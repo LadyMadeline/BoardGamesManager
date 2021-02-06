@@ -12,12 +12,20 @@
     <a asp-action="CreateItem">Create New</a> | 
     <a asp-action="BoardGames">Back to list</a>
 </p>
-<form asp-controller="BoardGamesManager" asp-action="BoardGames" method="get">
-    <p>
-        Title: <input type="text" name="SearchString" />
-        <input type="submit" value="Search" />
-    </p>
-</form>
+<div class="col-md-5">
+    <form asp-controller="BoardGamesManager" asp-action="BoardGames" method="get">
+        <div class="input-group-append">
+            <input placeholder="Title" type="text" name="SearchString" class="form-control" />
+            <select name="Sort">
+                <option selected>Sort:</option>
+                <option value="Price Asc">Ascending price</option>
+                <option value="Price Desc">Descending price</option>
+            </select>
+            <input type="submit" value="Search" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+<br />
 <table class="table table-bordered text-center">
     <thead>
         <tr>
