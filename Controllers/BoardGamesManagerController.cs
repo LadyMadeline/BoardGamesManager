@@ -31,20 +31,7 @@ namespace BoardGamesManager.Controllers
         {
             IEnumerable<BoardGameViewModel> boardGames = BoardGamesService.GetBoardGames();
             boardGames = BoardGamesService.Search(searchString, boardGames);
-
-            switch (sort)
-            {
-                case "Sort:" :
-                    break;
-
-                case "Price Asc":
-                    boardGames = boardGames.OrderBy(boardGame => boardGame.Price);
-                    break;
-
-                case "Price Desc":
-                    boardGames = boardGames.OrderByDescending(boardGame => boardGame.Price);
-                    break;
-            }
+            boardGames = BoardGamesService.Sort(sort, boardGames);
 
             return View(boardGames);
         }

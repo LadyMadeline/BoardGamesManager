@@ -84,5 +84,24 @@ namespace BoardGamesManager.Services
 
             return boardGames;
         }
+
+        public IEnumerable<BoardGameViewModel> Sort(string sort, IEnumerable<BoardGameViewModel> boardGames)
+        {
+            switch (sort)
+            {
+                case "Sort:":
+                    break;
+
+                case "Price Asc":
+                    boardGames = boardGames.OrderBy(boardGame => boardGame.Price);
+                    break;
+
+                case "Price Desc":
+                    boardGames = boardGames.OrderByDescending(boardGame => boardGame.Price);
+                    break;
+            }
+
+            return boardGames;
+        }
     }
 }
