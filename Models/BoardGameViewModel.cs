@@ -35,4 +35,11 @@ namespace BoardGamesManager.Models
             this.Id = id;
         }
     }
+
+    public enum SortTypes
+    {
+        Default,
+        PriceAsc,
+        PriceDesc
+    }
 }

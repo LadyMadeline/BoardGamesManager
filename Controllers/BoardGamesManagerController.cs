@@ -27,7 +27,7 @@ namespace BoardGamesManager.Controllers
         }
 
         [HttpGet]
-        public IActionResult BoardGames(string searchString, string sort)
+        public IActionResult BoardGames(string searchString, SortTypes sort)
         {
             IEnumerable<BoardGameViewModel> boardGames = BoardGamesService.GetBoardGames();
             boardGames = BoardGamesService.Search(searchString, boardGames);
