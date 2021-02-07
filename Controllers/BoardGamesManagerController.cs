@@ -105,7 +105,7 @@ namespace BoardGamesManager.Controllers
 
             if (boardGameViewModel.Image != null)
             {
-                string wwwRootPath = Path.GetRelativePath(HostEnvironment.WebRootPath, "BoardGamesManager/wwwroot");
+                string wwwRootPath = HostEnvironment.WebRootPath;
                 FileStorageUtil.DeleteFile(wwwRootPath, boardGame.ImagePath);
                 string fileName = await FileStorageUtil.CreateFile(wwwRootPath, boardGameViewModel.Image.FileName, boardGameViewModel.Image);
                 BoardGamesService.EditBoardGame(id, Path.Combine("/image/", fileName), boardGameViewModel);
