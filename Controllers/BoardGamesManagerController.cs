@@ -30,11 +30,7 @@ namespace BoardGamesManager.Controllers
         public IActionResult BoardGames(string searchString, string sort)
         {
             IEnumerable<BoardGameViewModel> boardGames = BoardGamesService.GetBoardGames();
-
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                boardGames = boardGames.Where(boardGame => boardGame.Title.Contains(searchString));
-            }
+            boardGames = BoardGamesService.Search(searchString, boardGames);
 
             switch (sort)
             {

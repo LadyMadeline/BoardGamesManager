@@ -14,5 +14,6 @@ namespace BoardGamesManager.Services
         public void DeleteBoardGame(int id);
         public void EditBoardGame(int id, BoardGameViewModel boardGameViewModel);
         public void EditBoardGame(int id, string imagePath, BoardGameViewModel boardGameViewModel);
+        public IEnumerable<BoardGameViewModel> Search(string searchString, IEnumerable<BoardGameViewModel> boardGames);
     }
 }

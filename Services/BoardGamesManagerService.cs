@@ -74,5 +74,15 @@ namespace BoardGamesManager.Services
             BoardGameContext.Update(item);
             BoardGameContext.SaveChanges();
         }
+
+        public IEnumerable<BoardGameViewModel> Search(string searchString, IEnumerable<BoardGameViewModel> boardGames)
+        {
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                boardGames = boardGames.Where(boardGame => boardGame.Title.Contains(searchString));
+            }
+
+            return boardGames;
+        }
     }
 }
