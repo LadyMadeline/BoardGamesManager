@@ -101,5 +101,16 @@ namespace BoardGamesManager.Controllers
 
             return RedirectToAction("BoardGames");
         }
+
+        public IActionResult CreateList()
+        {
+            return View();
+        }
+
+        public IActionResult CreateList(string listName)
+        {
+            
+            return Redirect("List");
+        }
     }
 }

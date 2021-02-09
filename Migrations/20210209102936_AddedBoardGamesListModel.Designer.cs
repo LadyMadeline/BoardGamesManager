@@ -3,14 +3,16 @@ using BoardGamesManager.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BoardGamesManager.Migrations
 {
     [DbContext(typeof(BoardGamesManagerContext))]
-    partial class BoardGamesManagerContextModelSnapshot : ModelSnapshot
+    [Migration("20210209102936_AddedBoardGamesListModel")]
+    partial class AddedBoardGamesListModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,19 +56,40 @@ namespace BoardGamesManager.Migrations
                     b.ToTable("BoardGame");
                 });
 
-            modelBuilder.Entity("BoardGamesManager.Models.BoardGamesTagModel", b =>
+            modelBuilder.Entity("BoardGamesManager.Models.BoardGameViewModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<string>("BoardGamesTag")
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("GameDuration")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LinkToStore")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NumberOfPlayers")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<string>("RecomendedAge")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("BoardGamesTag");
+                    b.ToTable("BoardGameViewModel");
                 });
 #pragma warning restore 612, 618
         }

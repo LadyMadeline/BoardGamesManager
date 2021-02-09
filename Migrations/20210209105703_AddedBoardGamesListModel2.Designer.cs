@@ -3,20 +3,37 @@ using BoardGamesManager.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BoardGamesManager.Migrations
 {
     [DbContext(typeof(BoardGamesManagerContext))]
-    partial class BoardGamesManagerContextModelSnapshot : ModelSnapshot
+    [Migration("20210209105703_AddedBoardGamesListModel2")]
+    partial class AddedBoardGamesListModel2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.2");
+
+            modelBuilder.Entity("BoardGameDataBaseModelHuy", b =>
+                {
+                    b.Property<int>("BoardGamesListId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BoardGamesListId1")
+                        .HasColumnType("int");
+
+                    b.HasKey("BoardGamesListId", "BoardGamesListId1");
+
+                    b.HasIndex("BoardGamesListId1");
+
+                    b.ToTable("BoardGameDataBaseModelHuy");
+                });
 
             modelBuilder.Entity("BoardGamesManager.Models.BoardGameDataBaseModel", b =>
                 {
@@ -54,19 +71,34 @@ namespace BoardGamesManager.Migrations
                     b.ToTable("BoardGame");
                 });
 
-            modelBuilder.Entity("BoardGamesManager.Models.BoardGamesTagModel", b =>
+            modelBuilder.Entity("BoardGamesManager.Models.Huy", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<string>("BoardGamesTag")
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("BoardGamesTag");
+                    b.ToTable("Huys");
+                });
+
+            modelBuilder.Entity("BoardGameDataBaseModelHuy", b =>
+                {
+                    b.HasOne("BoardGamesManager.Models.BoardGameDataBaseModel", null)
+                        .WithMany()
+                        .HasForeignKey("BoardGamesListId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BoardGamesManager.Models.Huy", null)
+                        .WithMany()
+                        .HasForeignKey("BoardGamesListId1")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
